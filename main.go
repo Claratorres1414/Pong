@@ -19,6 +19,14 @@ type Paddle struct {
 	Height float64
 }
 
+func (p *Paddle) Draw(screen *ebiten.Image) {
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Scale(p.Width, p.Height)
+	op.GeoM.Translate(p.X, p.Y)
+
+	screen.DrawImage(whiteImage, op)
+}
+
 type Game struct {
 	Player Paddle
 }
@@ -45,11 +53,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		A: 255,
 	})
 
-	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(g.Player.Width, g.Player.Height)
-	op.GeoM.Translate(g.Player.X, g.Player.Y)
-
-	screen.DrawImage(whiteImage, op)
+	g.Player.Draw(screen)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
