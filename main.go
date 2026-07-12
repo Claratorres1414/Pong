@@ -12,7 +12,16 @@ const (
 	ScreenHeight = 600
 )
 
-type Game struct{}
+type Paddle struct {
+	X      float64
+	Y      float64
+	Width  float64
+	Height float64
+}
+
+type Game struct {
+	Player Paddle
+}
 
 func (g *Game) Update() error {
 	// Aqui ficará toda a lógica do jogo.
@@ -26,17 +35,37 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		B: 35,
 		A: 255,
 	})
+
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Translate(g.Player.Width, g.Player.Height)
+	op.GeoM.Translate(g.Player.X, g.Player.Y)
+
+	screen.DrawImage(whiteImage, op)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return ScreenWidth, ScreenHeight
 }
 
+var whiteImage *ebiten.Image
+
+func init() {
+	whiteImage = ebiten.NewImage(1, 1)
+	whiteImage.Fill(color.White)
+}
+
 func main() {
 	ebiten.SetWindowSize(ScreenWidth, ScreenHeight)
 	ebiten.SetWindowTitle("Pong em Go")
 
-	game := &Game{}
+	game := &Game{
+		Player: Paddle{
+			X:      30,
+			Y:      250,
+			Width:  20,
+			Height: 100,
+		},
+	}
 
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
