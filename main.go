@@ -24,7 +24,16 @@ type Game struct {
 }
 
 func (g *Game) Update() error {
-	// Aqui ficará toda a lógica do jogo.
+	const speed = 5
+
+	if ebiten.IsKeyPressed(ebiten.KeyW) {
+		g.Player.Y -= speed
+	}
+
+	if ebiten.IsKeyPressed(ebiten.KeyS) {
+		g.Player.Y += speed
+	}
+
 	return nil
 }
 
