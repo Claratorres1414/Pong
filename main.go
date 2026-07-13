@@ -39,6 +39,17 @@ func main() {
 
 			speed: 5.0,
 		},
+
+		Ball: Ball{
+			X: ScreenWidth / 2,
+			Y: ScreenHeight / 2,
+
+			Width:  15,
+			Height: 15,
+
+			VX: 4,
+			VY: 4,
+		},
 	}
 
 	if err := ebiten.RunGame(game); err != nil {
