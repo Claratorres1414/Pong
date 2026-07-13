@@ -7,11 +7,13 @@ import (
 )
 
 type Game struct {
-	Player Paddle
+	Player1 Paddle
+	Player2 Paddle
 }
 
 func (g *Game) Update() error {
-	g.Player.Update()
+	g.Player1.Update()
+	g.Player2.Update()
 
 	return nil
 }
@@ -24,7 +26,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		A: 255,
 	})
 
-	g.Player.Draw(screen)
+	g.Player1.Draw(screen)
+	g.Player2.Draw(screen)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {

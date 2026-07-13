@@ -16,11 +16,24 @@ func main() {
 	ebiten.SetWindowTitle("Pong")
 
 	game := &Game{
-		Player: Paddle{
+		Player1: Paddle{
 			X:      30,
 			Y:      250,
 			Width:  20,
 			Height: 100,
+
+			UpKey:   ebiten.KeyW,
+			DownKey: ebiten.KeyS,
+		},
+
+		Player2: Paddle{
+			X:      ScreenWidth - 30 - 20,
+			Y:      250,
+			Width:  20,
+			Height: 100,
+
+			UpKey:   ebiten.KeyArrowUp,
+			DownKey: ebiten.KeyArrowDown,
 		},
 	}
 

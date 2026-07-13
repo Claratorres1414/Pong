@@ -3,21 +3,20 @@ package main
 import "github.com/hajimehoshi/ebiten/v2"
 
 type Paddle struct {
-	X      float64
-	Y      float64
-	Width  float64
-	Height float64
+	X, Y           float64
+	Width, Height  float64
+	UpKey, DownKey ebiten.Key
 }
 
 func (p *Paddle) Update() {
 	const speed = 5
 
-	if ebiten.IsKeyPressed(ebiten.KeyW) {
-		p.Y -= speed
+	if ebiten.IsKeyPressed(p.DownKey) {
+		p.Y += speed
 	}
 
-	if ebiten.IsKeyPressed(ebiten.KeyS) {
-		p.Y += speed
+	if ebiten.IsKeyPressed(p.UpKey) {
+		p.Y -= speed
 	}
 }
 
