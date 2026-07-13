@@ -6,17 +6,24 @@ type Paddle struct {
 	X, Y           float64
 	Width, Height  float64
 	UpKey, DownKey ebiten.Key
+	speed          float64
 }
 
 func (p *Paddle) Update() {
-	const speed = 5
-
 	if ebiten.IsKeyPressed(p.DownKey) {
-		p.Y += speed
+		p.Y += p.speed
 	}
 
 	if ebiten.IsKeyPressed(p.UpKey) {
-		p.Y -= speed
+		p.Y -= p.speed
+	}
+
+	if p.Y < 0 {
+		p.Y = 0
+	}
+
+	if p.Y+p.Height > ScreenHeight {
+		p.Y = ScreenHeight - p.Height
 	}
 }
 

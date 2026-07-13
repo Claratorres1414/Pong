@@ -24,6 +24,8 @@ func main() {
 
 			UpKey:   ebiten.KeyW,
 			DownKey: ebiten.KeyS,
+
+			speed: 5.0,
 		},
 
 		Player2: Paddle{
@@ -34,6 +36,8 @@ func main() {
 
 			UpKey:   ebiten.KeyArrowUp,
 			DownKey: ebiten.KeyArrowDown,
+
+			speed: 5.0,
 		},
 	}
 
