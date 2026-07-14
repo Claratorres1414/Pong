@@ -14,6 +14,14 @@ type Ball struct {
 func (b *Ball) Update() {
 	b.X += b.VX
 	b.Y += b.VY
+
+	if b.Y <= 0 || b.Y+b.Height >= ScreenHeight {
+		b.VY *= -1
+	}
+
+	if b.X <= 0 || b.X+b.Width >= ScreenWidth {
+		b.VX *= -1
+	}
 }
 
 func (b *Ball) Draw(screen *ebiten.Image) {
