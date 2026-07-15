@@ -19,6 +19,8 @@ func (g *Game) Update() error {
 
 	g.Ball.Update()
 
+	g.CheckCollisions()
+
 	return nil
 }
 
@@ -38,4 +40,16 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return ScreenWidth, ScreenHeight
+}
+
+func (g *Game) CheckCollisions() {
+	if g.Ball.CollidesWith(&g.Player1) {
+		g.Ball.X = g.Player1.X + g.Player1.Width
+		g.Ball.VX *= -1
+	}
+
+	if g.Ball.CollidesWith(&g.Player2) {
+		g.Ball.X = g.Player2.X - g.Ball.Width
+		g.Ball.VX *= -1
+	}
 }

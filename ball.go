@@ -44,3 +44,10 @@ func (b *Ball) Draw(screen *ebiten.Image) {
 
 	screen.DrawImage(whiteImage, op)
 }
+
+func (b *Ball) CollidesWith(p *Paddle) bool {
+	return b.X < p.X+p.Width &&
+		b.X+b.Width > p.X &&
+		b.Y < p.Y+p.Height &&
+		b.Y+b.Height > p.Y
+}
