@@ -45,11 +45,22 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 func (g *Game) CheckCollisions() {
 	if g.Ball.CollidesWith(&g.Player1) {
 		g.Ball.X = g.Player1.X + g.Player1.Width
-		g.Ball.VX *= -1
+		g.BounceBall(&g.Player1)
 	}
 
 	if g.Ball.CollidesWith(&g.Player2) {
 		g.Ball.X = g.Player2.X - g.Ball.Width
-		g.Ball.VX *= -1
+		g.BounceBall(&g.Player2)
 	}
+}
+
+func (g *Game) BounceBall(p *Paddle) {
+	ballCenter := g.Ball.Y + g.Ball.Height/2
+	paddleCenter := p.Y + p.Height/2
+
+	difference := ballCenter - paddleCenter
+	normalized := difference / (p.Height / 2)
+
+	g.Ball.VY = normalized * 5
+	g.Ball.VX *= -1
 }
