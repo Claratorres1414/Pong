@@ -49,6 +49,8 @@ func main() {
 
 			VX: 4,
 			VY: 4,
+
+			Speed: 5.0,
 		},
 	}
 

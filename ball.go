@@ -9,6 +9,8 @@ type Ball struct {
 
 	VX float64
 	VY float64
+
+	Speed float64
 }
 
 func (b *Ball) Update() {

@@ -61,6 +61,6 @@ func (g *Game) BounceBall(p *Paddle) {
 	difference := ballCenter - paddleCenter
 	normalized := difference / (p.Height / 2)
 
-	g.Ball.VY = normalized * 5
+	g.Ball.VY = normalized * g.Ball.Speed
 	g.Ball.VX *= -1
 }
