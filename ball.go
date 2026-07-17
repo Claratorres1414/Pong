@@ -28,12 +28,14 @@ func (b *Ball) Update() {
 	}
 
 	if b.X <= 0 {
-		b.X = 0
+		b.X = ScreenWidth / 2
+		b.Y = ScreenHeight / 2
 		b.VX *= -1
 	}
 
 	if b.X+b.Width >= ScreenWidth {
-		b.X = ScreenWidth - b.Width
+		b.X = ScreenWidth / 2
+		b.Y = ScreenHeight / 2
 		b.VX *= -1
 	}
 }
