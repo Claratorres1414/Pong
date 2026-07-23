@@ -1,9 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/text"
+	"golang.org/x/image/font/basicfont"
 )
 
 type Game struct {
@@ -11,6 +14,9 @@ type Game struct {
 	Player2 Paddle
 
 	Ball Ball
+
+	Player1Score int
+	Player2Score int
 }
 
 func (g *Game) Update() error {
@@ -20,6 +26,7 @@ func (g *Game) Update() error {
 	g.Ball.Update()
 
 	g.CheckCollisions()
+	g.CheckGoals()
 
 	return nil
 }
@@ -36,6 +43,17 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	g.Player2.Draw(screen)
 
 	g.Ball.Draw(screen)
+
+	score := fmt.Sprintf("%d   -   %d", g.Player1Score, g.Player2Score)
+
+	text.Draw(
+		screen,
+		score,
+		basicfont.Face7x13,
+		380,
+		40,
+		color.White,
+	)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
@@ -63,4 +81,17 @@ func (g *Game) BounceBall(p *Paddle) {
 
 	g.Ball.VY = normalized * g.Ball.Speed
 	g.Ball.VX *= -1
+}
+
+func (g *Game) CheckGoals() {
+
+	if g.Ball.X <= 0 {
+		g.Player2Score++
+		g.Ball.Reset()
+	}
+
+	if g.Ball.X+g.Ball.Width >= ScreenWidth {
+		g.Player1Score++
+		g.Ball.Reset()
+	}
 }

@@ -26,18 +26,6 @@ func (b *Ball) Update() {
 		b.Y = ScreenHeight - b.Height
 		b.VY *= -1
 	}
-
-	if b.X <= 0 {
-		b.X = ScreenWidth / 2
-		b.Y = ScreenHeight / 2
-		b.VX *= -1
-	}
-
-	if b.X+b.Width >= ScreenWidth {
-		b.X = ScreenWidth / 2
-		b.Y = ScreenHeight / 2
-		b.VX *= -1
-	}
 }
 
 func (b *Ball) Draw(screen *ebiten.Image) {
@@ -54,4 +42,12 @@ func (b *Ball) CollidesWith(p *Paddle) bool {
 		b.X+b.Width > p.X &&
 		b.Y < p.Y+p.Height &&
 		b.Y+b.Height > p.Y
+}
+
+func (b *Ball) Reset() {
+	b.X = ScreenWidth / 2
+	b.Y = ScreenHeight / 2
+
+	b.VX *= -1
+	b.VY = 0
 }
